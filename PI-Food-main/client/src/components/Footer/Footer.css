@@ -1,0 +1,38 @@
+
+
+.footer {
+    background-color: #212121;
+    color: #ffffff;
+    padding: 2rem;
+  }
+  
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .container img {
+    height: 4rem;
+    margin-right: 1rem;
+  }
+  
+  .text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  
+  .text span {
+    font-size: 0.8rem;
+  }
+  
+  .text span:first-child {
+    text-align: left;
+  }
+  
+  .text span:last-child {
+    text-align: right;
+  }
+  

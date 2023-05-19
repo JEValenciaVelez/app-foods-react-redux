@@ -1,0 +1,32 @@
+
+.detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+  }
+  
+  .detail-name {
+    margin-top: 0;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    margin: 2rem 0;
+  }
+  
+  h2 {
+    margin-top: 0;
+  }
+  
+  Link {
+    text-decoration: none;
+    color: #212121;
+    font-size: 1.2rem;
+  }
+  
+  Link:hover {
+    color: #FFA500;
+  }
+  

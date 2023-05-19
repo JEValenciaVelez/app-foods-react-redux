@@ -1,0 +1,64 @@
+
+
+/* Inicio.css */
+
+.landing-page {
+  text-align: center;
+  padding: 20px;
+}
+
+.saludo {
+  font-size: 30px;
+  color: #333;
+  animation: fadeIn 1s;
+}
+
+.title2 {
+  font-size: 24px;
+  color: #777;
+  animation: slideInLeft 1s;
+}
+
+.image img {
+  width: 200px;
+  height: 200px;
+  animation: rotate 2s infinite;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  animation: fadeIn 1s;
+}
+
+/* Animaciones */
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-100px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* @keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} */
