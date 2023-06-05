@@ -1,11 +1,10 @@
 
 import { Link } from 'react-router-dom';
 import './NewRecipe.css'
-import data from '../../utils/data';
-import { useEffect, useState } from 'react';
+import data from '../../utils/data'
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { createRecipe } from '../../redux/actions';
-import axios from 'axios';
+import { postRecipe } from '../../redux/actions';
 
 
 
@@ -13,64 +12,63 @@ import axios from 'axios';
 const NewRecipe = () => {
 
     const [inputs, setInputs] = useState({
-        name:'',
+        name: '',
         image: '',
         summary: '',
-        healtScore:0,
-        steps: '',
-        diets:''
+        healthScore:0,
+        steps:'',
+        diets: []
     });
 
-    const [errors , setErrors] = useState({
-        name:'',
+    const [errors, setErrors] = useState({
+        name: '',
         image: '',
         summary: '',
-        healtScore:0,
-        steps: '',
-        diets:''
+        healthScore:0,
+        steps:'',
+        diets: ''
     })
+
+    const dispatch = useDispatch();
+
+    const handleChange = (e) => {
+        if(e.target.name === 'diets'){
+            setInputs({
+                ...inputs,
+                [e.target.name]: [e.target.value]
+            });
+            console.log(inputs);
+        }else{
+            setInputs({
+                ...inputs,
+                [e.target.name]: e.target.value
+            });
+            console.log(inputs);
+        }
+       
+    };
 
     const validate = (input) => {
         const errors = {};
-        if(!input.name) errors.name = 'Se requiere nombre';
-        if(!input.image) errors.image = 'Se requiere url de imagen';
-        if(!input.summary) errors.summary = 'Se requiere detalle de la receta';
-        if(!input.healtScore) errors.healtScore = 'Se requiere puntaje saludable';
+        if(!inputs.name) errors.name = 'Falta nombre';
+        if(!inputs.image) errors.image = 'Falta url de imagen';
+        if(!inputs.summary) errors.summary = 'Falta descripcion del plato';
+        if(!inputs.healthScore) errors.healthScore = 'falta puntuacion';
+        if(!inputs.steps) errors.steps = 'Falta instrucciones del plato';
+        if(!inputs.diets)  errors.diets = 'Falta tipo de dietas';
 
         return errors;
     };
 
-    const handleChange = (e)=>{
-       
-        const value =  e.target.value ;
-        const name = e.target.name;
-
-        setInputs({
-            ...inputs,
-            [name]: value
-        });
-
-        setErrors(validate(inputs));
-    };
-
-    const dispatch = useDispatch();
-    
-
-    const handleSubmit = async (e)=>{
+    const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(inputs, errors);
-        console.log(JSON.stringify(inputs))
-
-        if(Object.keys(errors).length===0){
-            dispatch(createRecipe(inputs));
-            return inputs;
-        }
-
-        return alert('LLena todos los campos');
+        console.log(inputs)
+       if(Object.keys(validate(inputs)).length>0){
+        alert('Llena todos los campos');
+        return errors;
+       }
+       else dispatch(postRecipe(inputs));
     };
-
-    
-
 
     return (
         <form action="" className='form-newRecipe' onSubmit={handleSubmit}>
@@ -82,7 +80,7 @@ const NewRecipe = () => {
             name='name'
             onChange={handleChange}
             />
-            {errors.name && <p className='error'>{errors.name}</p>}
+            {/* {errors.name && <p className='error'>{errors.name}</p>} */}
             <label htmlFor="image">imagen</label>
             <input 
             type="text" 
@@ -90,7 +88,7 @@ const NewRecipe = () => {
             name='image'
             onChange={handleChange}
             />
-            {errors.image && <p className='error'>{errors.image}</p>}
+            {/* {errors.image && <p className='error'>{errors.image}</p>} */}
             <label htmlFor="summary">Detalle del plato</label>
             <textarea 
             name="summary" 
@@ -99,15 +97,15 @@ const NewRecipe = () => {
             rows="10" 
             onChange={handleChange}
             placeholder='Describe el plato'></textarea>
-             {errors.summary && <p className='error'>{errors.summary}</p>}
+             {/* {errors.summary && <p className='error'>{errors.summary}</p>} */}
             <label htmlFor="healtscore">puntuacion saludable</label>
             <input 
             type='number' 
-            name='healtScore' 
+            name='healthScore' 
             placeholder='Numero de 1 a 100'
             onChange={handleChange}
             />
-             {errors.healtScore && <p className='error'>{errors.healtScore}</p>}
+             {/* {errors.healtScore && <p className='error'>{errors.healtScore}</p>} */}
             <label htmlFor="steps">Paso a paso</label>
             <textarea 
             name="steps" 
@@ -115,9 +113,9 @@ const NewRecipe = () => {
             rows="10"
             onChange={handleChange}
             ></textarea>
-             {errors.steps && <p className='error'>{errors.steps}</p>}
+             {/* {errors.steps && <p className='error'>{errors.steps}</p>} */}
             <h3>Dietas</h3>
-            {data.map(el=>(
+             {data.map(el=>(
                 <label key={el.id}>
                     <input
                      type="checkbox" 
@@ -128,7 +126,7 @@ const NewRecipe = () => {
                      />
                      {el.diets.join(', ')}
                 </label>
-            ))}
+            ))} 
             <button>Enviar</button>
             <Link to={`/home`}>
             <h1>Volver</h1>

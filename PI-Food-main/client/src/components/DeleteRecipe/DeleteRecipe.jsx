@@ -9,27 +9,19 @@ import { Link } from "react-router-dom";
 
 const DeleteRecipe = () => {
 
+  const [name, setName] = useState('');
   const dispatch = useDispatch();
-  let [name, setName] = useState('');
-  let [error, setError] = useState('');
 
-  const validate = (name)=>{
-    if(!name) error = 'Debe haber nombre';
-    if(error.length>0) alert('Debe ingresar nombre');
-    return error;
-  };
-
-  const handleChange = (e) => {
+  const handleChange = (e)=> {
     setName(e.target.value);
   };
 
   const handleSubmit = (e)=>{
     e.preventDefault();
-    setError(validate(name));
-    if(error.length === 0){
-      dispatch(deleteRecipe(name));
-    }
+    dispatch(deleteRecipe(name));
+    alert(`Receta ${name} Eliminada con exito`);
   };
+  
 
     return(
       <div>

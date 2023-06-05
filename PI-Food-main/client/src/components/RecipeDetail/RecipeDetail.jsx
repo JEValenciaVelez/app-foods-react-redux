@@ -1,33 +1,35 @@
 
 import './RecipeDetail.css';
 import { Link, useParams } from 'react-router-dom';
-import './RecipeDetail.css';
-import data from '../../utils/data';
+import './RecipeDetail.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getRecipes } from '../../redux/actions';
+import { detail } from '../../redux/actions';
+
 
 
 const RecipeDetail = ()=> {
 
-    const recipes = useSelector(state => state.recipes);
+    const recipe = useSelector(state=>state.recipeDetail);
     const dispatch = useDispatch();
     const {id} = useParams();
+    // console.log('id que entra por params',id);
 
     useEffect(()=>{
-        dispatch(getRecipes());
-    },[]);
-
-    const findRecipe = recipes.find(rec=> rec.id === id);
+        dispatch(detail(id));
+    },[id,dispatch])
     
+   
 
     return(
         <div className='detail'>
-            <h1 className='detail-name'>{findRecipe.name}</h1>
-            <img src={findRecipe.image} alt="" />
-            <h2>{findRecipe.summary}</h2>
-            <h2>Healtscore: {findRecipe.healthScore}</h2>
-            <h2>{findRecipe.diets}</h2>
+            <h1 className='detail-name'>{recipe.title}</h1>
+            <h1>{recipe.name}</h1>
+            <img src={recipe.image} alt="" />
+            <h2>{recipe.summary}</h2>
+            <h2>Healtscore: {recipe.healthScore}</h2>
+            <h2>{recipe.diets}</h2>
+            <h3>{recipe.steps}</h3>
             <Link to={`/home`}>
             <h1>Volver</h1>
             </Link>

@@ -12,3 +12,4 @@ export const FILTER_DIETS = "FILTER_DIETS" //Listo
 export const DETAIL_PAGE = "DETAIL_PAGE" //Listo
 export const UPDATE_RECIPE = "UPDATE_RECIPE"
 export const FILTER_CREATED = "FILTER_CREATED"
+export const GET_DATABASE = "GET_DATABASE";
