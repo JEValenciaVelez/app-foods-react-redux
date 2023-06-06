@@ -1,4 +1,4 @@
-import {  CREATE_RECIPE, DELETE_RECIPE, GET_DATABASE, GET_RECIPES, GET_RECIPE_DETAIL,  } from "./action-types"
+import {  CREATE_RECIPE, DELETE_RECIPE, GET_DATABASE, GET_RECIPES, GET_RECIPE_DETAIL, GET_RECIPE_NAME, ORDER_RECIPES,  } from "./action-types"
 import axios from 'axios';
 
 //actions creator
@@ -70,6 +70,26 @@ export function getDatabase () {
         }catch(error){
             console.log(error);
             alert(error.message);
+        }
+    }
+}
+
+
+export function order (order) {
+    return  (dispatch) => {
+        console.log('order en la action-> ', order)
+        dispatch({type: ORDER_RECIPES, payload: order});
+    }
+}
+
+
+
+export function getRecipeByName(name){
+    return  (dispatch) => {
+        try{
+            dispatch({type: GET_RECIPE_NAME, payload: name})
+        }catch(error){
+            console.log(error);
         }
     }
 }

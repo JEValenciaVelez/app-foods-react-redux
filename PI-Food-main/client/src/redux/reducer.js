@@ -1,4 +1,4 @@
-import { CREATE_RECIPE, DELETE_RECIPE, GET_DATABASE, GET_RECIPES, GET_RECIPE_DETAIL } from "./action-types";
+import { CREATE_RECIPE, DELETE_RECIPE, GET_DATABASE, GET_RECIPES, GET_RECIPE_DETAIL, GET_RECIPE_NAME, ORDER_RECIPES } from "./action-types";
 
 
 //Creamos el estado inicial
@@ -41,6 +41,41 @@ function rootReducer(state = initialState, { type, payload }) {
         return {
             ...state,
             recipes: payload
+        }
+
+    case GET_RECIPE_NAME:
+        return {
+            ...state,
+            recipes: [...state.recipes].filter(rec=>rec.name.split(' ').includes(payload))
+        }
+
+    case ORDER_RECIPES:
+        switch (payload){
+            case 'A-Z':
+                
+                return {
+                    ...state,
+                    recipes: [...state.recipes].sort((a,b)=>a.name.charAt(0).localeCompare(b.name.charAt(0)))
+                }
+
+            case 'Z-A':
+                return {
+                    ...state,
+                    recipes: [...state.recipes].sort((a,b)=>b.name.charAt(0).localeCompare(a.name.charAt(0)))
+                }
+
+            case 'des':
+                return {
+                    ...state,
+                    recipes: [...state.recipes].sort((a,b)=> b.healthScore - a.healthScore) 
+                }
+
+            case 'asc':
+                return {
+                    ...state,
+                    recipes: [...state.recipes].sort((a,b)=>a.healthScore - b.healthScore)
+                }
+            
         }
 
     default:
