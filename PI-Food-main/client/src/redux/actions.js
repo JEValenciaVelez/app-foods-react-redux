@@ -85,8 +85,10 @@ export function order (order) {
 
 
 export function getRecipeByName(name){
-    return  (dispatch) => {
+    return  async (dispatch) => {
         try{
+            const response = await axios.get();
+            const data = response.data;
             dispatch({type: GET_RECIPE_NAME, payload: name})
         }catch(error){
             console.log(error);

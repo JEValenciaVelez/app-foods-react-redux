@@ -13,6 +13,7 @@ const getRecipes = async() => {
                 id: rec.id,
                 title: rec.title,
                 image: rec.image,
+                healthScore: rec.healthScore,
                 summary: rec.summary.replace(/<\/?[^>]+(>|$)/g, ""),
                 diets: rec.diets,
             }

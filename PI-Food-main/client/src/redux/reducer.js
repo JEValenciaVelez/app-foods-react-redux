@@ -46,7 +46,7 @@ function rootReducer(state = initialState, { type, payload }) {
     case GET_RECIPE_NAME:
         return {
             ...state,
-            recipes: [...state.recipes].filter(rec=>rec.name.split(' ').includes(payload))
+            recipes: [...state.recipes].filter(rec=>rec.title.toLowerCase().split(' ').includes(payload.toLowerCase()))
         }
 
     case ORDER_RECIPES:
@@ -55,13 +55,13 @@ function rootReducer(state = initialState, { type, payload }) {
                 
                 return {
                     ...state,
-                    recipes: [...state.recipes].sort((a,b)=>a.name.charAt(0).localeCompare(b.name.charAt(0)))
+                    recipes: [...state.recipes].sort((a,b)=>a.title.charAt(0).localeCompare(b.title.charAt(0)))
                 }
 
             case 'Z-A':
                 return {
                     ...state,
-                    recipes: [...state.recipes].sort((a,b)=>b.name.charAt(0).localeCompare(a.name.charAt(0)))
+                    recipes: [...state.recipes].sort((a,b)=>b.title.charAt(0).localeCompare(a.title.charAt(0)))
                 }
 
             case 'des':
